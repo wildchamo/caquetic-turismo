@@ -9,8 +9,8 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const users = [
     {
-      name: "Cesar",
-      phoneNumber: "3115688883",
+      name: "Carlos Prada",
+      phoneNumber: "3108805124",
     },
   ];
 
