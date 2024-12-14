@@ -1,4 +1,6 @@
+import { create_user, get_users } from "@/services/user";
 import { NextResponse } from "next/server";
+get_users
 
 const acountSid = process.env.TWILIO_ACCOUNT_ID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -7,6 +9,11 @@ const client = require("twilio")(acountSid, authToken);
 export const dynamic = "force-dynamic";
 
 export async function GET() {
+
+  const users2 = await get_users()
+
+  console.log(users2)
+
   const users = [
     {
       name: "Carlos Prada",

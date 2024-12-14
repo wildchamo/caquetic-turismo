@@ -14,7 +14,7 @@ export async function create_user({name, phone_number}) {
 export async function get_users() {
   try {
     const { data, error } = await supabase
-      .from('user')
+      .from('users')
       .select('*');
     if (error) {
       throw error;
