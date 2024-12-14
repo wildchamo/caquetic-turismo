@@ -32,9 +32,7 @@ export function UserInfoModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">
-          Abrir Modal de Información del Usuario
-        </Button>
+        <Button variant="outline">Unirme al Club</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
