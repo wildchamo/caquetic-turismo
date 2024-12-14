@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "CaqueTIC",
+  title: "Yakú Map",
   description: "Caquetá en la era digital",
 };
 
