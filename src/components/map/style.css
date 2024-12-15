@@ -10,11 +10,8 @@
   fill: #ffd700;
 }
 
-
-
 .region {
-  transition: fill 0.3s ease;
-
+  transition: fill 0.1s ease;
 }
 
 .region:hover {
