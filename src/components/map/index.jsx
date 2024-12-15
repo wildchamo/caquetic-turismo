@@ -50,7 +50,7 @@ export const Map = () => {
           baseProfile="tiny"
           xmlns="http://www.w3.org/2000/svg"
           version="1.2"
-          viewBox="0 0 2007 2480"
+          viewBox="0 0 2007 1000"
         >
           <defs />
           <g
