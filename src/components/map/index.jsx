@@ -4,69 +4,12 @@ import "./style.css";
 import { MapModal } from "./map-modal";
 import { get_sitiosMunicipio } from "@/services/sitio_interes";
 
-const cities = [
-  {
-    id: "1",
-    name: "Florencia",
-    pointsOfInteres: [
-      {
-        id: "5",
-        name: "Parque1",
-        description: "Descripcion del parque 1",
-        type: "parque",
-        cx: 770,
-        cy: 350,
-      },
-      {
-        id: "7",
-        name: "Parque2",
-        description: "Descripcion del parque 2",
-        type: "rio",
-        cx: 730,
-        cy: 400,
-      },
-    ],
-  },
-  {
-    id: "2",
-    name: "Belen de los Andaquies",
-  },
-  {
-    id: "3",
-    name: "Puerto Rico",
-    pointsOfInteres: [
-      {
-        id: "10",
-        name: "Parque1",
-        description: "Descripcion del parque 1",
-        type: "parque",
-        cx: 818,
-        cy: 315,
-      },
-      {
-        id: "12",
-        name: "Parque2",
-        description: "Descripcion del parque 2",
-        type: "rio",
-        cx: 815,
-        cy: 355,
-      },
-
-      {
-        id: "15",
-        name: "Parque3",
-        description: "Descripcion del parque 2",
-        type: "rio",
-        cx: 840,
-        cy: 345,
-      },
-    ],
-  },
-];
 export const Map = () => {
+  const [cities, setCities] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState(null);
-  const [interestPoints, setInterestPoints] = useState([]);
+  const [interestPoints, setInterestPoints] = useState(null);
   const [zoomCoords, setZoomCoords] = useState(null);
+
   const alreadyChargedRef = useRef(false);
 
   const [showModal, setShowModal] = useState(false);
@@ -78,8 +21,6 @@ export const Map = () => {
     const bbox = element.getBBox();
     const centerX = bbox.x;
     const centerY = bbox.y;
-
-    console.log(centerX, centerY);
 
     const newSelectedRegion = element.id;
     if (selectedRegion === newSelectedRegion) {
@@ -131,6 +72,8 @@ export const Map = () => {
 
       try {
         const response = await get_sitiosMunicipio();
+        console.log(response);
+        setCities(response);
         const sitiosInteres = response.flatMap((municipio) =>
           municipio.sitio_interes.filter((sitio) => sitio.coordX !== null)
         );
@@ -213,7 +156,7 @@ export const Map = () => {
           </svg>
         );
 
-      case "3":
+      case "4":
         return (
           <svg
             baseProfile="tiny"
@@ -242,31 +185,26 @@ export const Map = () => {
                 fill="none"
               />
             </g>
-            {/* {selectedRegion === "3"
-              ? */}
-            {cities[2].pointsOfInteres.map((city) => (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                x={city.cx}
-                y={city.cy}
-                key={city.id}
-                onClick={() => handleShowInfoModal(city.id)}
-                viewBox="0 0 512 512"
-              >
-                <path d="M357.676 20.387q-3.917.014-7.856.29c-63.314 4.438-131.13 58.006-142.117 130.253L494 162.992V89.656c-8.09-7.792-16.415-15.25-24.953-22.177c-34.59-28.067-72.195-47.234-111.37-47.093zM125.55 40.812C89.363 40.94 51.743 55.725 18 86.825v81.3l172.107-18.815l-.363-.054c3.872-26.688 14.327-50.957 29.162-71.742c-26.973-24.13-59.536-36.82-93.357-36.7zm110.263 129.514c-24.49-.258-109.87 12.136-109.602 27.078c.46 25.55 104.433 51.553 94.726 53.018C122.553 265.27 67.968 265.427 35.34 295.2c-38.914 35.507 214.983 80.92 184.422 89.687c-57.204 16.412-107.82 36.256-109.002 88.414c-.17 7.52.8 14.385 2.705 20.7h54.945c-15.423-20.635-24.05-40.664-14.6-45.912c10.413 15.107 22.492 31.126 36.174 45.912h64.286c-19.474-9.912-51.732-29.408-50.594-49.424c1.6-28.17 66.37-47.758 69.883-47.758c0 0-48.786 26.384-49.867 49.866c-.767 16.68 22.317 36.985 35.69 47.316h51.976c-16.454-12.325-26.478-24.92-20.426-31.885c15.54 11.066 33.115 22.438 51.826 31.885h106.717c-56.74-15.988-102.683-32.67-115.225-53.127c-10.196-16.63 72.362-27.836 60.408-78.902c-5.79-24.738-58.24-41.094-203.222-62.626c-25.368-3.768 134.358-19.456 129.818-57.11c-2.65-21.98-103.288-26.85-114.58-36.933c-4.746-4.237 5.863-29.56 29.137-34.974zM91.425 308.056c33.376-.145 84.385 22.424 122.8 36.747l-1.79 11.67c-28.404-10.606-103.905-37.464-127.442-48.077c2.06-.22 4.207-.332 6.432-.34m270.234 53.803q.156-.01-.015.253c3.9 12.183-21.487 44.05-61.807 42.842c14.153-7.15 59.732-43.004 61.822-43.096z" />
-              </svg>
-              // <circle
-              //   key={city.id}
-              //   cx={city.cx}
-              //   cy={city.cy}
-              //   r={8}
-              //   onClick={() => handleShowInfoModal(city.id)}
-              //   fill={city.type === "parque" ? "green" : "blue"}
-              //   className="point-of-interest"
-              // ></circle>
-            ))}
+
+            {interestPoints
+              .filter((point) => point.fk_municipio === 4)
+              .map((point) => {
+                console.log(point);
+                return (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    key={point.id}
+                    width="16"
+                    height="16"
+                    x={point.coordX}
+                    y={point.coordY}
+                    onClick={() => handleShowInfoModal(point.id)}
+                    viewBox="0 0 512 512"
+                  >
+                    <path d="M357.676 20.387q-3.917.014-7.856.29c-63.314 4.438-131.13 58.006-142.117 130.253L494 162.992V89.656c-8.09-7.792-16.415-15.25-24.953-22.177c-34.59-28.067-72.195-47.234-111.37-47.093zM125.55 40.812C89.363 40.94 51.743 55.725 18 86.825v81.3l172.107-18.815l-.363-.054c3.872-26.688 14.327-50.957 29.162-71.742c-26.973-24.13-59.536-36.82-93.357-36.7zm110.263 129.514c-24.49-.258-109.87 12.136-109.602 27.078c.46 25.55 104.433 51.553 94.726 53.018C122.553 265.27 67.968 265.427 35.34 295.2c-38.914 35.507 214.983 80.92 184.422 89.687c-57.204 16.412-107.82 36.256-109.002 88.414c-.17 7.52.8 14.385 2.705 20.7h54.945c-15.423-20.635-24.05-40.664-14.6-45.912c10.413 15.107 22.492 31.126 36.174 45.912h64.286c-19.474-9.912-51.732-29.408-50.594-49.424c1.6-28.17 66.37-47.758 69.883-47.758c0 0-48.786 26.384-49.867 49.866c-.767 16.68 22.317 36.985 35.69 47.316h51.976c-16.454-12.325-26.478-24.92-20.426-31.885c15.54 11.066 33.115 22.438 51.826 31.885h106.717c-56.74-15.988-102.683-32.67-115.225-53.127c-10.196-16.63 72.362-27.836 60.408-78.902c-5.79-24.738-58.24-41.094-203.222-62.626c-25.368-3.768 134.358-19.456 129.818-57.11c-2.65-21.98-103.288-26.85-114.58-36.933c-4.746-4.237 5.863-29.56 29.137-34.974zM91.425 308.056c33.376-.145 84.385 22.424 122.8 36.747l-1.79 11.67c-28.404-10.606-103.905-37.464-127.442-48.077c2.06-.22 4.207-.332 6.432-.34m270.234 53.803q.156-.01-.015.253c3.9 12.183-21.487 44.05-61.807 42.842c14.153-7.15 59.732-43.004 61.822-43.096z" />
+                  </svg>
+                );
+              })}
           </svg>
         );
 
@@ -592,7 +530,7 @@ export const Map = () => {
                   fillRule="evenodd"
                 />
                 <path
-                  id="3"
+                  id="4"
                   name="Puerto Rico"
                   className={`${
                     selectedRegion === "3" ? "highlight-region" : "region"
