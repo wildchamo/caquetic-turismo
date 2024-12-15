@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import "./style.css";
-
+import { MapModal } from "./map-modal";
 const cities = [
   {
     id: "1",
@@ -11,13 +11,15 @@ const cities = [
         id: "5",
         name: "Parque1",
         description: "Descripcion del parque 1",
+        type: "parque",
         cx: 770,
         cy: 350,
       },
       {
-        id: "5",
+        id: "7",
         name: "Parque2",
         description: "Descripcion del parque 2",
+        type: "rio",
         cx: 730,
         cy: 400,
       },
@@ -28,8 +30,8 @@ const cities = [
     name: "Belen de los Andaquies",
   },
   {
-    id: "3",
-    name: "El Doncello",
+    id: "4",
+    name: "Puerto Rico",
   },
 ];
 export const Map = () => {
@@ -37,6 +39,8 @@ export const Map = () => {
   const [zoomCoords, setZoomCoords] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
+
+  const [selectedPoint, setSelectedPoint] = useState(null);
 
   const handleRegionClick = (event) => {
     const element = event.target;
@@ -91,6 +95,7 @@ export const Map = () => {
         (point) => point.id === id
       );
       console.log(pointOfInterest);
+      setSelectedPoint(pointOfInterest);
     } else {
       console.log("Point of interest not found");
     }
@@ -130,7 +135,7 @@ export const Map = () => {
                     cy={city.cy}
                     r={5}
                     onClick={() => handleShowInfoModal(city.id)}
-                    fill="red"
+                    fill={city.type === "parque" ? "green" : "blue"}
                     className="point-of-interest"
                   ></circle>
                 ))
@@ -642,8 +647,8 @@ export const Map = () => {
       >
         Volver al mapa
       </button>
-
       <div className="relative">{renderSVGContent()}</div>
+      <MapModal open={showModal} setOpen={setShowModal} data={selectedPoint} />
     </div>
   );
 };
