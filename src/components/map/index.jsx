@@ -1,7 +1,9 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./style.css";
 import { MapModal } from "./map-modal";
+import { get_sitiosMunicipio } from "@/services/sitio_interes";
+
 const cities = [
   {
     id: "1",
@@ -63,8 +65,8 @@ const cities = [
 ];
 export const Map = () => {
   const [selectedRegion, setSelectedRegion] = useState(null);
+  const [interestPoints, setInterestPoints] = useState([]);
   const [zoomCoords, setZoomCoords] = useState(null);
-
   const alreadyChargedRef = useRef(false);
 
   const [showModal, setShowModal] = useState(false);
@@ -115,19 +117,10 @@ export const Map = () => {
   };
 
   const handleShowInfoModal = (id) => {
-    const city = cities.find((city) =>
-      city.pointsOfInteres.some((point) => point.id === id)
-    );
+    const point = interestPoints.find((point) => point.id === Number(id));
 
-    if (city) {
-      const pointOfInterest = city.pointsOfInteres.find(
-        (point) => point.id === id
-      );
-      console.log(pointOfInterest);
-      setSelectedPoint(pointOfInterest);
-    } else {
-      console.log("Point of interest not found");
-    }
+    console.log(point);
+    setSelectedPoint(point);
 
     setShowModal(true);
   };
@@ -135,16 +128,23 @@ export const Map = () => {
   const fetchAllData = async () => {
     if (!alreadyChargedRef.current) {
       alreadyChargedRef.current = true;
-      return;
+
       try {
-        const response = await fetch("URL_DE_TU_API");
-        const data = await response.json();
-        console.log(data);
+        const response = await get_sitiosMunicipio();
+        const sitiosInteres = response.flatMap((municipio) =>
+          municipio.sitio_interes.filter((sitio) => sitio.coordX !== null)
+        );
+        console.log(sitiosInteres);
+        setInterestPoints(sitiosInteres);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
   };
+
+  useEffect(() => {
+    fetchAllData();
+  }, []);
 
   const renderSVGContent = () => {
     switch (selectedRegion) {
@@ -242,7 +242,6 @@ export const Map = () => {
                 fill="none"
               />
             </g>
-            <p>hola</p>
             {/* {selectedRegion === "3"
               ? */}
             {cities[2].pointsOfInteres.map((city) => (
