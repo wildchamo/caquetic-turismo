@@ -49,7 +49,7 @@ export const Map = () => {
   const getTransform = () => {
     if (zoomCoords) {
       const { x, y } = zoomCoords;
-      const scale = 2;
+      const scale = 1.2;
       const translateX = -x * (scale - 1);
       const translateY = -y * (scale - 1);
       return `translate(${translateX}px, ${translateY}px) scale(${scale})`;
@@ -68,7 +68,7 @@ export const Map = () => {
         onClick={handleResetZoom}
         className={`${
           selectedRegion ? "" : "hidden"
-        } fixed top-4 right-4 z-50 mb-4 p-2 bg-blue-500 text-white rounded`}
+        } fixed top-12 right-8 z-50 mb-4 p-2 bg-blue-500 text-white rounded`}
       >
         Deshacer Zoom
       </button>
