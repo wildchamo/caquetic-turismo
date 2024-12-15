@@ -10,12 +10,12 @@ export default function Home() {
       </div>
 
       {/* Texto centrado */}
-      <div className="text-center mb-6 font-semibold text-3xl">
+      <div className="text-center mb-6 mt-24 font-semibold text-3xl">
         ¿Aún no sabes dónde viajar?
       </div>
 
       {/* Botón centrado */}
-      <div className="text-center mb-6">
+      <div className="text-center ">
         <Link
           className="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-green-500 transition duration-300"
           href={"/chat"}
