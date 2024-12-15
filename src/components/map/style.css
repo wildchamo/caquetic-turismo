@@ -1,0 +1,12 @@
+.hover-path {
+  transition: fill 0.3s ease;
+  fill: blue;
+}
+
+.selected {
+  fill: red;
+}
+
+/* .hover-path:hover {
+  fill: red;
+} */
