@@ -1,0 +1,22 @@
+.hover-path {
+  transition: fill 0.3s ease;
+  fill: blue;
+}
+
+.selected {
+  fill: red;
+}
+.highlight-region {
+  fill: #ffd700;
+}
+
+
+
+.region {
+  transition: fill 0.3s ease;
+
+}
+
+.region:hover {
+  fill: #ffd700;
+}
