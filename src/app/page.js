@@ -1,9 +1,8 @@
-"use client";
 import { Map } from "@/components/map";
 
 export default function Home() {
   return (
-    <main>
+    <main className="grid place-content-center">
       <Map />
       aún no sabes que destino tomar? hablar con nuestra ai para descrubirlo
     </main>
