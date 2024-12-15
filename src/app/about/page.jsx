@@ -11,7 +11,7 @@ export default function About() {
         {/* Logo Section */}
         <section className="flex justify-center mb-8">
           <img
-            src="/YAKUMAP.PNG" // Reemplaza con la ruta de tu logo
+            src="/YAKUMAP.png" // Reemplaza con la ruta de tu logo
             alt="Yakú Map Logo"
             className="w-80 h-auto" // Cambiado para agrandar la imagen
           />
