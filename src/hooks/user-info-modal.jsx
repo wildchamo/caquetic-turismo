@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { create_user } from "@/services/user";
+import { LogIn } from "@/services/user";
 
 export function UserInfoModal() {
   const [open, setOpen] = useState(false);
@@ -28,6 +29,12 @@ export function UserInfoModal() {
   const onSubmit = async (data) => {
     console.log("Enviado:", data);
     await create_user(data);
+    setOpen(false);
+  };
+
+  const onSubmitLog = async (data) => {
+    console.log("Enviado:", data);
+    await LogIn(data);
     setOpen(false);
   };
 
@@ -47,7 +54,7 @@ export function UserInfoModal() {
         </DialogHeader>
 
         {isLogin ? (
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmitLog)}>
             <div className="grid gap-4">
               {/* Campo para el correo */}
               <div className="items-center gap-4">

@@ -1,9 +1,9 @@
-import supabase  from './conection'; 
+import supabase  from '../conection'; 
 
-export async function create_user({name, phone_number}) {
+export async function create_user({name, phone_number, email}) {
   const { data, error } = await supabase
     .from('users')
-    .insert({ name, phone_number });
+    .insert({ name, phone_number, email });
   if (error) {
     console.error('Error al insertar datos:', error);
   } else {
@@ -20,6 +20,21 @@ export async function get_users() {
       throw error;
     }
     return data;
+  } catch (err) {
+    console.error('Error al obtener datos:', err.message);
+    return null;
+  }
+}
+
+export async function LogIn({ email }){
+  try {
+    console.log(`Email: ${email}`)
+    const { data, error } = await supabase.auth.signInWithOtp({
+      email: "yancarlosvillegas7@gmail.com",
+      // options: {
+      //   shouldCreateUser: false
+      // }
+    });
   } catch (err) {
     console.error('Error al obtener datos:', err.message);
     return null;
