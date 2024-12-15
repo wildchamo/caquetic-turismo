@@ -2,7 +2,7 @@ import supabase  from '../conection';
 
 export async function fetchAllTables() {
     try {
-        const tables = ['users', 'municipio', 'event', 'tipo_sitio', 'sitio_interes'];
+        const tables = ['municipio', 'event', 'tipo_sitio', 'sitio_interes'];
 
         const results = await Promise.all(
           tables.map(async (table) => {
@@ -14,6 +14,9 @@ export async function fetchAllTables() {
             return { table, data };
           })
         );
+
+        console.log('Resultados:', results);
+        return results;
     } catch (err) {
       console.error('Error al obtener datos:', err.message);
       return null;
