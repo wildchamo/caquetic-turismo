@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { create_user } from "@/services/user";
 
 export function UserInfoModal() {
   const [open, setOpen] = useState(false);
@@ -23,10 +24,10 @@ export function UserInfoModal() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit =async  (data) => {
     console.log("Enviado:", data);
+    await create_user(data)
     setOpen(false);
-    // Aquí típicamente enviarías los datos a tu backend
   };
 
   return (
@@ -60,12 +61,12 @@ export function UserInfoModal() {
               )}
             </div>
             <div className="items-center gap-4">
-              <Label htmlFor="phoneNumber" className="text-right">
+              <Label htmlFor="phone_number" className="text-right">
                 Teléfono
               </Label>
               <Input
-                id="phoneNumber"
-                {...register("phoneNumber", {
+                id="phone_number"
+                {...register("phone_number", {
                   required: "El teléfono es obligatorio",
                   pattern: {
                     value: /^\+?[1-9]\d{1,14}$/,
