@@ -121,7 +121,6 @@ export const Map = () => {
                   ></circle>
                 ))
               : null}
-            <p>hola</p>
           </svg>
         );
 
@@ -625,9 +624,9 @@ export const Map = () => {
         onClick={handleResetZoom}
         className={`${
           selectedRegion ? "" : "hidden"
-        } fixed top-12 right-8 z-50 mb-4 p-2 bg-blue-500 text-white rounded`}
+        } fixed top-24 right-8 z-50 mb-4 p-2 bg-green-600 text-white rounded hover:bg-green-500`}
       >
-        Deshacer Zoom
+        Volver al mapa
       </button>
 
       <div className="relative">{renderSVGContent()}</div>
