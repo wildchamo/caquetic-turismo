@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const ChatBotAI = () => {
   const [messages, setMessages] = useState([]);
@@ -23,7 +23,14 @@ const ChatBotAI = () => {
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: input }],
+          messages: [
+            defaultPrompt, // Agregar el prompt por defecto como contexto inicial
+            ...messages.map((msg) => ({
+              role: msg.user === "Usuario" ? "user" : "assistant",
+              content: msg.text,
+            })),
+            { role: "user", content: input }, // Mensaje actual del usuario
+          ],
           max_tokens: 150,
         }),
       });
@@ -55,7 +62,7 @@ const ChatBotAI = () => {
   return (
     <div className="fixed right-0 top-0 h-screen w-80 bg-white shadow-lg p-4">
       <div className="text-center font-bold text-xl text-indigo-600 mb-4">
-        Yakú Bot🤖
+        Yakú Bot 🤖
       </div>
       <div className="chatbox h-[70vh] overflow-y-auto border border-gray-300 p-2 mb-4 rounded-lg">
         {messages.map((msg, index) => (
@@ -90,6 +97,6 @@ const ChatBotAI = () => {
       </div>
     </div>
   );
-};  
+};
 
 export default ChatBotAI;

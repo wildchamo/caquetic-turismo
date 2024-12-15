@@ -38,8 +38,8 @@ export default function About() {
             {/* Logo Section */}
           <section className="flex justify-center mb-8">
             <img
-              src="/YAKUMAP.PNG" // Reemplaza con la ruta de tu logo
-              alt="Yakú Map Logo"
+              src="/JOSE.jpeg" // Reemplaza con la ruta de tu logo
+              alt="DESARROLLADOR JOSE"
               className="w-80 h-auto" // Cambiado para agrandar la imagen
             />
           </section>
@@ -54,8 +54,8 @@ export default function About() {
               {/* Logo Section */}
           <section className="flex justify-center mb-8">
             <img
-              src="/YAKUMAP.PNG" // Reemplaza con la ruta de tu logo
-              alt="Yakú Map Logo"
+              src="/CESAR.jpeg" // Reemplaza con la ruta de tu logo
+              alt="DESARROLLADOR CESAR"
               className="w-80 h-auto" // Cambiado para agrandar la imagen
             />
           </section>
@@ -71,8 +71,8 @@ export default function About() {
             {/* Logo Section */}
           <section className="flex justify-center mb-8">
             <img
-              src="/YAKUMAP.PNG" // Reemplaza con la ruta de tu logo
-              alt="Yakú Map Logo"
+              src="/YAN.jpeg" // Reemplaza con la ruta de tu logo
+              alt="DESARROLLADOR YAN"
               className="w-80 h-auto" // Cambiado para agrandar la imagen
             />
           </section>
@@ -88,8 +88,8 @@ export default function About() {
             {/* Logo Section */}
           <section className="flex justify-center mb-8">
             <img
-              src="/YAKUMAP.PNG" // Reemplaza con la ruta de tu logo
-              alt="Yakú Map Logo"
+              src="/ANDER.jpeg" // Reemplaza con la ruta de tu logo
+              alt="DESARROLLADOR ANDERSON"
               className="w-80 h-auto" // Cambiado para agrandar la imagen
             />
           </section>
