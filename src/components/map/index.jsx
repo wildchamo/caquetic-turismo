@@ -7,6 +7,22 @@ const cities = [
   {
     id: "1",
     name: "Florencia",
+    pointsOfInteres: [
+      {
+        id: "1",
+        name: "Parque1",
+        description: "Descripcion del parque 1",
+        cx: 770,
+        cy: 350,
+      },
+      {
+        id: "2",
+        name: "Parque2",
+        description: "Descripcion del parque 2",
+        cx: 730,
+        cy: 400,
+      },
+    ],
   },
   {
     id: "2",
@@ -20,6 +36,8 @@ const cities = [
 export const Map = () => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [zoomCoords, setZoomCoords] = useState(null);
+
+  const [showModal, setShowModal] = useState(false);
 
   const handleRegionClick = (event) => {
     const element = event.target;
@@ -90,6 +108,20 @@ export const Map = () => {
                 className="highlight-region"
               />
             </g>
+
+            {selectedRegion === "1"
+              ? cities[0].pointsOfInteres.map((city) => (
+                  <circle
+                    key={city.id}
+                    cx={city.cx}
+                    cy={city.cy}
+                    r={5}
+                    fill="red"
+                    className="point-of-interest"
+                  ></circle>
+                ))
+              : null}
+            <p>hola</p>
           </svg>
         );
 
