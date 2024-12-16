@@ -22,3 +22,21 @@ export async function fetchAllTables() {
       return null;
     }
   }
+
+  export async function get_sitiosEventsMunicipio() {
+    try {
+      const { data, error } = await supabase
+        .from("municipio")
+        .select("*, sitio_interes(*), event(*)")
+        .filter("sitio_interes.coordX", "not.is", null);
+      if (error) {
+        throw error;
+      }
+
+      console.log(data)
+      return data;
+    } catch (err) {
+      console.error("Error al obtener datos:", err.message);
+      return null;
+    }
+}

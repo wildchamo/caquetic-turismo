@@ -45,9 +45,7 @@ export function UserInfoModal() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>
-            {isLogin ? "¡INICIA SESIÓN!" : "¡REGÍSTRATE!"}
-          </DialogTitle>
+          <DialogTitle>{isLogin ? "¡INICIA SESIÓN!" : "¡REGÍSTRATE!"}</DialogTitle>
           <DialogDescription>
             {isLogin
               ? "Accede a tu cuenta para consultar los eventos y actividades en el Caquetá. 🦜🌿"
@@ -98,9 +96,7 @@ export function UserInfoModal() {
                 </Label>
                 <Input
                   id="name"
-                  {...register("name", {
-                    required: "El nombre es obligatorio",
-                  })}
+                  {...register("name", { required: "El nombre es obligatorio" })}
                   className="col-span-3"
                 />
                 {errors.name && (
@@ -121,8 +117,7 @@ export function UserInfoModal() {
                     required: "El teléfono es obligatorio",
                     pattern: {
                       value: /^\+?[1-9]\d{1,14}$/,
-                      message:
-                        "Por favor, ingrese un número de teléfono válido",
+                      message: "Por favor, ingrese un número de teléfono válido",
                     },
                   })}
                   className="col-span-3"
