@@ -9,9 +9,12 @@ import {
 } from "@/components/ui/dialog";
 
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const MapModal = ({ open, setOpen, data }) => {
   if (!open) return null;
+
+  const query = `?message=Hola, quiero info sobre el destino ${data.name}. ¿Qué eventos y sitios turísticos hay para ver allá?`;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -34,6 +37,11 @@ export const MapModal = ({ open, setOpen, data }) => {
             Cómo llegar
           </Button>
         </a>
+        <Link href={"/chat" + query}>
+          <Button className="w-full" type="submit">
+            Preguntarle a Yakú Bot
+          </Button>
+        </Link>
       </DialogContent>
     </Dialog>
   );

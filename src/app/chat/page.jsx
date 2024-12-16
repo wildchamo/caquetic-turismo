@@ -1,9 +1,14 @@
 "use client";
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function ChatBotPage() {
+  const searchParams = useSearchParams();
+
+  const search = searchParams.get("message");
+
   const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(search || "");
   const [isLoading, setIsLoading] = useState(false);
 
   const sendMessage = async () => {
