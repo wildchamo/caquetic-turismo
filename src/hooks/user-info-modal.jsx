@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { create_user } from "@/services/user";
+import { create_user, SignUpUser } from "@/services/user";
 import { LogIn } from "@/services/user";
 
 export function UserInfoModal() {
@@ -28,6 +28,7 @@ export function UserInfoModal() {
 
   const onSubmit = async (data) => {
     console.log("Enviado:", data);
+    await SignUpUser(data.email, data.password);
     await create_user(data);
     setOpen(false);
   };
