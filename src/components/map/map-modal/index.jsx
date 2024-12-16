@@ -19,8 +19,8 @@ export const MapModal = ({ open, setOpen, data }) => {
 
   const handleClick = async () => {
     await createTravel({ userId: data.userId, id: data.id });
+    setOpen(false);
   };
-  console.warn(data);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-[425px] md:max-w-[600px]">
