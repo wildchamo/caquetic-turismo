@@ -72,3 +72,19 @@ export async function isLogged() {
   }
   return data;
 }
+
+export async function getUserTravels(id) {
+  try {
+    const { data, error } = await supabase
+      .from('travel')
+      .select('*')
+      .eq('id', id);
+    if (error) {
+      throw error;
+    }
+    return data;
+  } catch (err) {
+    console.error('Error al obtener datos:', err.message);
+    return null;
+  }
+}
