@@ -1,4 +1,4 @@
-import supabase  from '../conection'; 
+import supabase from "../conection";
 
 export async function SignUpUser(email, password) {
   const { data, error } = await supabase.auth.signUp({
@@ -7,46 +7,44 @@ export async function SignUpUser(email, password) {
   });
 
   if (error) {
-    console.error('Error al crear el usuario:', error.message);
+    console.error("Error al crear el usuario:", error.message);
   } else {
-    console.log('Usuario creado exitosamente:', data);
+    console.log("Usuario creado exitosamente:", data);
   }
 }
 
-export async function create_user({name, phone_number, email}) {
+export async function create_user({ name, phone_number, email }) {
   const { data, error } = await supabase
-    .from('users')
+    .from("users")
     .insert({ name, phone_number, email });
   if (error) {
-    console.error('Error al insertar datos:', error);
+    console.error("Error al insertar datos:", error);
   } else {
-    console.log('Datos insertados:', data);
+    console.log("Datos insertados:", data);
   }
 }
 
 export async function get_users() {
   try {
-    const { data, error } = await supabase
-      .from('users')
-      .select('*');
+    const { data, error } = await supabase.from("users").select("*");
     if (error) {
       throw error;
     }
     return data;
   } catch (err) {
-    console.error('Error al obtener datos:', err.message);
+    console.error("Error al obtener datos:", err.message);
     return null;
   }
 }
 
-export async function LogIn({ email }){
+export async function LogIn({ email }) {
   try {
-    console.log(`Email: ${email}`)
+    console.log(`Email: ${email}`);
     const { data, error } = await supabase.auth.signInWithOtp({
-      email: email
+      email: email,
     });
   } catch (err) {
-    console.error('Error al obtener datos:', err.message);
+    console.error("Error al obtener datos:", err.message);
     return null;
   }
 }
@@ -54,15 +52,15 @@ export async function LogIn({ email }){
 export async function getByEmail(email) {
   try {
     const { data, error } = await supabase
-      .from('users')
-      .select('id')
-      .eq('email', email);
+      .from("users")
+      .select("id")
+      .eq("email", email);
     if (error) {
       throw error;
     }
     return data;
   } catch (err) {
-    console.error('Error al obtener datos:', err.message);
+    console.error("Error al obtener datos:", err.message);
     return null;
   }
 }

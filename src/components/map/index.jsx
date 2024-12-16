@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import "./style.css";
 import { MapModal } from "./map-modal";
 import { get_sitiosMunicipio } from "@/services/sitio_interes";
-
+import { getByEmail, isLogged } from "@/services/user";
 export const Map = () => {
   const [cities, setCities] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState({ name: "", id: null });
@@ -11,6 +11,8 @@ export const Map = () => {
   const [zoomCoords, setZoomCoords] = useState(null);
 
   const alreadyChargedRef = useRef(false);
+
+  const userId = useRef(null);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -65,6 +67,7 @@ export const Map = () => {
     const point = interestPoints.find((point) => point.id === Number(id));
 
     console.log(point);
+    console.log(userId);
     setSelectedPoint(point);
 
     setShowModal(true);
@@ -89,8 +92,18 @@ export const Map = () => {
     }
   };
 
+  const isLoggedEffect = async () => {
+    const user = await isLogged();
+    const userEmail = user?.user?.email;
+    console.warn("User Email:", userEmail);
+    const user2 = await getByEmail(userEmail);
+    console.warn("User2:", user2);
+    userId.current = user2[0]?.id;
+  };
+
   useEffect(() => {
     fetchAllData();
+    isLoggedEffect();
   }, []);
 
   const renderSVGPointType = (type) => {
@@ -742,7 +755,7 @@ export const Map = () => {
         <MapModal
           open={showModal}
           setOpen={setShowModal}
-          data={selectedPoint}
+          data={{ ...selectedPoint, userId: userId.current }}
         />
       </div>
     </section>

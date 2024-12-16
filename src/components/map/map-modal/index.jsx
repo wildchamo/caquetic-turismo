@@ -16,6 +16,7 @@ export const MapModal = ({ open, setOpen, data }) => {
 
   const query = `?message=Hola, quiero info sobre el destino ${data.name}. ¿Qué eventos y sitios turísticos hay para ver allá?`;
 
+  console.warn(data);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-[425px] md:max-w-[600px]">
@@ -24,12 +25,14 @@ export const MapModal = ({ open, setOpen, data }) => {
         </DialogHeader>
         <div className="flex justify-center">
           <img
-            className="max-w-full h-auto object-contain"
+            className="max-w-full h-auto max-h-[350px] object-contain"
             src={data?.image}
             alt=""
           />
         </div>
         {data?.description}
+
+        {/* {data?.userId} */}
 
         <a href={data?.ubication} target="_blank" rel="noreferrer">
           <Button className="w-full" type="submit">
