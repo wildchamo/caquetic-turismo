@@ -49,7 +49,6 @@ export function UserInfoModal({ type = "outline" }) {
 
   useEffect(() => {
     isLoggedInterface();
-    console.warn("user", user);
   }, []);
 
   const isLoggedInterface = async () => {
@@ -62,7 +61,6 @@ export function UserInfoModal({ type = "outline" }) {
 
     const userId = user3?.id;
 
-    console.error(userId);
     if (user3) {
       const response = await getUserTravels(userId);
 
