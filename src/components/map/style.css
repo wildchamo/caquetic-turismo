@@ -20,11 +20,11 @@
 
 .map-container {
   height: 100%;
-  overflow:hidden; /* Asegúrate de que el contenedor permita el desbordamiento */
+  overflow: hidden; /* Asegúrate de que el contenedor permita el desbordamiento */
   position: relative;
 }
 
 .svg-zoom {
-  transition: transform 0.1s ease-in-out; /* Añade una transición suave */
+  transition: transform 0.05s ease-in-out; /* Añade una transición suave */
   transform-origin: center center; /* Establece el origen de la transformación */
 }

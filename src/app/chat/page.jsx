@@ -6,37 +6,30 @@ export default function ChatBotPage() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const sendMessage = async (request) => {
-    if (!input) return;
-
+  const sendMessage = async () => {
     const newMessage = { user: "Usuario", text: input };
     setMessages((prev) => [...prev, newMessage]);
     setInput("");
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer TU_API_KEY",
-          },
-          body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: input }],
-            max_tokens: 150,
-          }),
-        }
-      );
+      const response = await fetch("/api/chat-gtp-promt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          input: input,
+          conversationHistory: messages,
+        }),
+      });
 
       const data = await response.json();
 
-      if (data.choices && data.choices.length > 0) {
+      if (data.response) {
         const botMessage = {
           user: "Yakú Bot",
-          text: data.choices[0].message.content,
+          text: data.response,
         };
         setMessages((prev) => [...prev, botMessage]);
       } else {

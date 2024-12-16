@@ -728,14 +728,14 @@ export const Map = () => {
       </button>
 
       <h2
-        className={`${
-          selectedRegion?.id ? "" : "hidden"
-        } fixed top-24 left-8 z-50 mb-4 p-2 text-2xl font-semibold	`}
+        className={`fixed top-24 left-8 z-50 mb-4 p-2 text-2xl font-semibold	`}
       >
-        {cities &&
-          selectedRegion &&
-          (cities.find((city) => city.id === Number(selectedRegion.id))?.name ||
-            "Ciudad no encontrada")}
+        {cities && selectedRegion
+          ? `Municipio de ${
+              cities.find((city) => city.id === Number(selectedRegion.id))
+                ?.name || "Departamento del Caquetá"
+            }`
+          : ""}
       </h2>
       <div className="relative" onMouseEnter={fetchAllData}>
         {renderSVGContent()}
