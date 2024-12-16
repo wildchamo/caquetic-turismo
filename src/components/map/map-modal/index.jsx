@@ -48,10 +48,11 @@ export const MapModal = ({ open, setOpen, data }) => {
             Preguntarle a Yakú Bot
           </Button>
         </Link>
-
-        <Button variant="green" className="w-full" onClick={handleClick}>
-          Reclamar recompensa
-        </Button>
+        {data?.userId && (
+          <Button variant="green" className="w-full" onClick={handleClick}>
+            Reclamar recompensa
+          </Button>
+        )}
       </DialogContent>
     </Dialog>
   );
