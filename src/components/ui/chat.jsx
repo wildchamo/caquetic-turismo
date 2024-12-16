@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const ChatBotAI = () => {
   const [messages, setMessages] = useState([]);
@@ -77,7 +77,7 @@ const ChatBotAI = () => {
                 : "bg-gray-200 text-left"
             }`}
           >
-            <span className="font-bold">{msg.user}:</span> {msg.text}
+            <span className="font-bold"></span> {msg.text}
           </div>
         ))}
         {isLoading && (

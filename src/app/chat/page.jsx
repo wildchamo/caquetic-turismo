@@ -74,7 +74,7 @@ function ChatBotPage() {
                   : "bg-gray-200 text-left"
               }`}
             >
-              <span className="font-bold">{msg.user}:</span> {msg.text}
+              <span className="font-bold">{msg.user && "Tú"}:</span> {msg.text}
             </div>
           ))}
           {isLoading && (
