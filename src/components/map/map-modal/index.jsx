@@ -29,7 +29,7 @@ export const MapModal = ({ open, setOpen, data }) => {
         </div>
         {data?.description}
 
-        <a href="" target="_blank" rel="noreferrer">
+        <a href={data?.ubication} target="_blank" rel="noreferrer">
           <Button className="w-full" type="submit">
             Cómo llegar
           </Button>
