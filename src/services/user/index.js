@@ -78,7 +78,7 @@ export async function getUserTravels(id) {
     const { data, error } = await supabase
       .from("travel")
       .select("*")
-      .eq("id", id);
+      .eq("fk_usuario", id);
     if (error) {
       throw error;
     }

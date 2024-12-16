@@ -64,12 +64,11 @@ export function UserInfoModal({ type = "outline" }) {
 
     console.error(userId);
     if (user3) {
-      let user4;
-
       const response = await getUserTravels(userId);
 
-      console.log(response);
-      setUser(user3);
+      console.log(response.length);
+
+      setUser({ user3, points: response.length });
       return setIsLoggedIn(true);
     } else {
       return setIsLoggedIn(false);
@@ -105,7 +104,7 @@ export function UserInfoModal({ type = "outline" }) {
         {isLoggedIn ? (
           <h2 className=" mt-4">
             Actualmente tienes{" "}
-            <span className="text-green-600">{user.points}</span> puntos. 🏆{" "}
+            <span className="font-bold text-xl">{user.points}</span> puntos. 🏆
             ¡Sigue participando en nuestras actividades para ganar más
             recompensas! 🌟
           </h2>
