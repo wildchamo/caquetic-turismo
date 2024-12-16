@@ -14,12 +14,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { create_user, isLogged, SignUpUser } from "@/services/user";
+import { create_user, isLogged, SignUpUser, getByEmail } from "@/services/user";
 import { LogIn } from "@/services/user";
 
 export function UserInfoModal({ type = "outline" }) {
   const [open, setOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const [user, setUser] = useState(null);
   const {
     register,
     handleSubmit,
@@ -42,11 +43,19 @@ export function UserInfoModal({ type = "outline" }) {
 
   useEffect(() => {
     isLoggedInterface();
+    console.warn("user", user);
   }, []);
 
   const isLoggedInterface = async () => {
     const user = await isLogged();
-    if (user) {
+    const userEmail = user?.user?.email;
+
+    const user2 = await getByEmail(userEmail);
+
+    setUser(user2);
+
+    if (user2) {
+      setUser(user2[0]);
       return setIsLoggedIn(true);
     } else {
       return setIsLoggedIn(false);
@@ -54,6 +63,19 @@ export function UserInfoModal({ type = "outline" }) {
   };
 
   const buttonLabel = isLoggedIn ? "Mis puntos" : "Unirme al club";
+
+  const modalTitle = isLoggedIn
+    ? `Tus Puntos`
+    : isLogin
+    ? "¡INICIA SESIÓN!"
+    : "¡REGÍSTRATE!";
+
+  const modalSubtitle = isLoggedIn
+    ? `${user.name} aquí puedes ver tus puntos`
+    : isLogin
+    ? "Accede a tu cuenta para consultar los eventos y actividades en el Caquetá. 🦜🌿"
+    : "Regístrate para recibir información exclusiva sobre eventos y actividades en el Caquetá. ¡Sé parte del club! 🌟";
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -62,14 +84,8 @@ export function UserInfoModal({ type = "outline" }) {
       <DialogContent className="sm:max-w-[425px]">
         {" "}
         <DialogHeader>
-          <DialogTitle>
-            {isLogin ? "¡INICIA SESIÓN!" : "¡REGÍSTRATE!"}
-          </DialogTitle>
-          <DialogDescription>
-            {isLogin
-              ? "Accede a tu cuenta para consultar los eventos y actividades en el Caquetá. 🦜🌿"
-              : "Regístrate para recibir información exclusiva sobre eventos y actividades en el Caquetá. ¡Sé parte del club! 🌟"}
-          </DialogDescription>
+          <DialogTitle>{modalTitle}</DialogTitle>
+          <DialogDescription>{modalSubtitle}</DialogDescription>
         </DialogHeader>
         {isLogin ? (
           <form onSubmit={handleSubmit(onSubmitLog)}>

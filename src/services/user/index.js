@@ -53,7 +53,7 @@ export async function getByEmail(email) {
   try {
     const { data, error } = await supabase
       .from("users")
-      .select("id")
+      .select("id, name")
       .eq("email", email);
     if (error) {
       throw error;
@@ -76,15 +76,15 @@ export async function isLogged() {
 export async function getUserTravels(id) {
   try {
     const { data, error } = await supabase
-      .from('travel')
-      .select('*')
-      .eq('id', id);
+      .from("travel")
+      .select("*")
+      .eq("id", id);
     if (error) {
       throw error;
     }
     return data;
   } catch (err) {
-    console.error('Error al obtener datos:', err.message);
+    console.error("Error al obtener datos:", err.message);
     return null;
   }
 }
