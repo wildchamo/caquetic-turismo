@@ -15,25 +15,28 @@ const ChatBotAI = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer TU_API_KEY",
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [
-            defaultPrompt, // Agregar el prompt por defecto como contexto inicial
-            ...messages.map((msg) => ({
-              role: msg.user === "Usuario" ? "user" : "assistant",
-              content: msg.text,
-            })),
-            { role: "user", content: input }, // Mensaje actual del usuario
-          ],
-          max_tokens: 150,
-        }),
-      });
+      const response = await fetch(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer ",
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [
+              defaultPrompt, // Agregar el prompt por defecto como contexto inicial
+              ...messages.map((msg) => ({
+                role: msg.user === "Usuario" ? "user" : "assistant",
+                content: msg.text,
+              })),
+              { role: "user", content: input }, // Mensaje actual del usuario
+            ],
+            max_tokens: 150,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -69,14 +72,18 @@ const ChatBotAI = () => {
           <div
             key={index}
             className={`p-2 rounded-md mb-2 ${
-              msg.user === "Usuario" ? "bg-indigo-100 text-right" : "bg-gray-200 text-left"
+              msg.user === "Usuario"
+                ? "bg-indigo-100 text-right"
+                : "bg-gray-200 text-left"
             }`}
           >
             <span className="font-bold">{msg.user}:</span> {msg.text}
           </div>
         ))}
         {isLoading && (
-          <div className="p-2 rounded-md mb-2 bg-gray-200 text-left">Escribiendo...</div>
+          <div className="p-2 rounded-md mb-2 bg-gray-200 text-left">
+            Escribiendo...
+          </div>
         )}
       </div>
       <div className="flex gap-2">
