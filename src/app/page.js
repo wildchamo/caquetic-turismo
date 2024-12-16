@@ -37,7 +37,7 @@ export default function Home() {
 
           <Link
             className="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-green-500 transition duration-300 mb-6 w-fit"
-            href={"/chat"}
+            href={"/about"}
           >
             Sobre el proyecto
           </Link>
