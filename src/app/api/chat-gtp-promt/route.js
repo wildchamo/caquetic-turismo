@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { get_users } from "@/services/user";
+import { get_sitiosEventsMunicipio } from "@/services/general";
 
 const openAIKey = process.env.OPENAI_API_KEY;
 
@@ -13,10 +13,10 @@ export async function POST(request) {
     return NextResponse.json({ response: "No hay input" });
   }
 
-  // const users2 = await get_users();
+  const caquetaInfo = await get_sitiosEventsMunicipio();
 
-  const prompt = `La siguiente es una conversación con un asistente de IA llamada Yaku Bot. El asistente es útil, creativo, inteligente y muy amigable. El asistente guiará al usuario sobre información relevante del departamento de Caquetá y lo que puede hacer aquí. A continuación se presenta la información disponible sobre Caquetá:
-${""}
+  const prompt = `La siguiente es una conversación con un asistente de IA llamada Yaku Bot. El asistente es útil, creativo, inteligente y muy amigable. El asistente guiará al usuario sobre información relevante del departamento de Caquetá y lo que puede hacer aquí. A continuación se presenta la información disponible sobre Caquetá en formato json:
+${caquetaInfo}
 
 El asistente está listo para responder cualquier pregunta sobre Caquetá, sus sitios turísticos, eventos y todo lo relativo al departamento.
 
@@ -65,10 +65,8 @@ const askChatGPT = async (message) => {
     const response = await fetch(BASE_URL, options);
     const json = await response.json();
 
-    console.log(json);
     const message = json.choices[0].message.content.trim();
 
-    console.log(message);
     return message;
   } catch (e) {
     console.error("Error en la llamada a la API: ", e);
