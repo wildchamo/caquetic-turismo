@@ -18,8 +18,12 @@ export async function POST(request) {
   const prompt = `La siguiente es una conversación con un asistente de IA llamada Yaku Bot. El asistente es útil, creativo, inteligente y muy amigable. El asistente guiará al usuario sobre información relevante del departamento de Caquetá y lo que puede hacer aquí. A continuación se presenta la información disponible sobre Caquetá:
 ${""}
 
-  El asistente está listo para responder cualquier pregunta sobre Caquetá, sus sitios turisticos, eventos y todo lo relativo al departamente. 
+El asistente está listo para responder cualquier pregunta sobre Caquetá, sus sitios turísticos, eventos y todo lo relativo al departamento.
 
+usa emojis amazonicos para tu respuesta
+
+ este es el mensaje del usuario, responde 
+ ${input}
 `;
 
   const response = await askChatGPT(prompt);
@@ -30,7 +34,7 @@ ${""}
 const askChatGPT = async (message) => {
   const BASE_URL = "https://api.openai.com/v1/chat/completions";
 
-  const model = "gpt-4o-mini";
+  const model = "gpt-3.5-turbo-0125";
   const payload = {
     model: model,
     messages: [
@@ -43,7 +47,7 @@ const askChatGPT = async (message) => {
         content: message,
       },
     ],
-    max_tokens: 200,
+    max_tokens: 500,
   };
 
   const headers = {
