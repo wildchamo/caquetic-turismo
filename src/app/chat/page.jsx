@@ -6,7 +6,7 @@ export default function ChatBotPage() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const sendMessage = async () => {
+  const sendMessage = async (request) => {
     if (!input) return;
 
     const newMessage = { user: "Usuario", text: input };
@@ -15,18 +15,21 @@ export default function ChatBotPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer TU_API_KEY",
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: input }],
-          max_tokens: 150,
-        }),
-      });
+      const response = await fetch(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer TU_API_KEY",
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: input }],
+            max_tokens: 150,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -68,14 +71,18 @@ export default function ChatBotPage() {
             <div
               key={index}
               className={`p-2 rounded-md mb-2 ${
-                msg.user === "Usuario" ? "bg-indigo-100 text-right" : "bg-gray-200 text-left"
+                msg.user === "Usuario"
+                  ? "bg-indigo-100 text-right"
+                  : "bg-gray-200 text-left"
               }`}
             >
               <span className="font-bold">{msg.user}:</span> {msg.text}
             </div>
           ))}
           {isLoading && (
-            <div className="p-2 rounded-md mb-2 bg-gray-200 text-left">Escribiendo...</div>
+            <div className="p-2 rounded-md mb-2 bg-gray-200 text-left">
+              Escribiendo...
+            </div>
           )}
         </div>
         <div className="flex gap-4">
@@ -104,7 +111,6 @@ export default function ChatBotPage() {
           className="rounded-lg shadow-md w-full h-full object-cover"
         />
       </section>
-
     </main>
   );
 }
