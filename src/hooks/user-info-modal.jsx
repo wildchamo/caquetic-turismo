@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { create_user, SignUpUser } from "@/services/user";
+import { create_user, isLogged, SignUpUser } from "@/services/user";
 import { LogIn } from "@/services/user";
 
 export function UserInfoModal({ type = "outline" }) {
@@ -26,6 +26,7 @@ export function UserInfoModal({ type = "outline" }) {
     formState: { errors },
   } = useForm();
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const onSubmit = async (data) => {
     console.log("Enviado:", data);
     await SignUpUser(data.email, data.password);
@@ -39,10 +40,24 @@ export function UserInfoModal({ type = "outline" }) {
     setOpen(false);
   };
 
+  useEffect(() => {
+    isLoggedInterface();
+  }, []);
+
+  const isLoggedInterface = async () => {
+    const user = await isLogged();
+    if (user) {
+      return setIsLoggedIn(true);
+    } else {
+      return setIsLoggedIn(false);
+    }
+  };
+
+  const buttonLabel = isLoggedIn ? "Mis puntos" : "Unirme al club";
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant={type}>Unirme al Club</Button>
+        <Button variant={type}> {buttonLabel}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         {" "}
