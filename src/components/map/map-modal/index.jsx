@@ -21,7 +21,6 @@ export const MapModal = ({ open, setOpen, data }) => {
       <DialogContent className="sm:max-w-[425px] md:max-w-[600px]">
         <DialogHeader>
           <DialogTitle className="w-fit">{data?.name}</DialogTitle>
-          <DialogDescription>{data?.description}</DialogDescription>
         </DialogHeader>
         <div className="flex justify-center">
           <img

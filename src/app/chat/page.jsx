@@ -54,9 +54,9 @@ export default function ChatBotPage() {
   };
 
   return (
-    <main className="p-8 bg-gray-100 min-h-screen flex">
+    <main className="p-2 bg-gray-100 min-h-screen flex">
       {/* Chatbot Section */}
-      <section className="bg-white rounded-lg shadow-lg p-8 w-2/3">
+      <section className="bg-white rounded-lg shadow-lg p-8 w-full md:w-2/3">
         <h1 className="text-4xl font-extrabold text-indigo-600 mb-4 text-center">
           🏕️ Yakú Bot 🤖
         </h1>
@@ -102,7 +102,7 @@ export default function ChatBotPage() {
       </section>
 
       {/* Imagen Section */}
-      <section className="w-1/3 flex justify-center items-center">
+      <section className="hidden md:flex w-full md:w-1/3 justify-center items-center">
         <img
           src="/caqueta.jpg" // Ruta de la imagen en la carpeta public
           alt="Descripción de la imagen"

@@ -45,7 +45,9 @@ export function UserInfoModal() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{isLogin ? "¡INICIA SESIÓN!" : "¡REGÍSTRATE!"}</DialogTitle>
+          <DialogTitle>
+            {isLogin ? "¡INICIA SESIÓN!" : "¡REGÍSTRATE!"}
+          </DialogTitle>
           <DialogDescription>
             {isLogin
               ? "Accede a tu cuenta para consultar los eventos y actividades en el Caquetá. 🦜🌿"
@@ -96,7 +98,9 @@ export function UserInfoModal() {
                 </Label>
                 <Input
                   id="name"
-                  {...register("name", { required: "El nombre es obligatorio" })}
+                  {...register("name", {
+                    required: "El nombre es obligatorio",
+                  })}
                   className="col-span-3"
                 />
                 {errors.name && (
@@ -117,7 +121,8 @@ export function UserInfoModal() {
                     required: "El teléfono es obligatorio",
                     pattern: {
                       value: /^\+?[1-9]\d{1,14}$/,
-                      message: "Por favor, ingrese un número de teléfono válido",
+                      message:
+                        "Por favor, ingrese un número de teléfono válido",
                     },
                   })}
                   className="col-span-3"
@@ -148,6 +153,25 @@ export function UserInfoModal() {
                 {errors.email && (
                   <p className="col-span-3 col-start-2 text-sm text-red-500">
                     {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="items-center gap-4 mt-4">
+                <Label htmlFor="password" className="text-right">
+                  Contraseña
+                </Label>
+                <Input
+                  id="password"
+                  type="password"
+                  {...register("password", {
+                    required: "La contraseña es obligatoria",
+                  })}
+                  className="col-span-3"
+                />
+                {errors.password && (
+                  <p className="col-span-3 col-start-2 text-sm text-red-500">
+                    {errors.password.message}
                   </p>
                 )}
               </div>
