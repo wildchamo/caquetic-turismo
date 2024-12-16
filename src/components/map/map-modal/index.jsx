@@ -16,6 +16,9 @@ export const MapModal = ({ open, setOpen, data }) => {
 
   const query = `?message=Hola, quiero info sobre el destino ${data.name}. ¿Qué eventos y sitios turísticos hay para ver allá?`;
 
+  const handleClick = () => {
+    alert("hola Jose");
+  };
   console.warn(data);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -35,15 +38,19 @@ export const MapModal = ({ open, setOpen, data }) => {
         {/* {data?.userId} */}
 
         <a href={data?.ubication} target="_blank" rel="noreferrer">
-          <Button className="w-full" type="submit">
+          <Button variant="green" className="w-full">
             Cómo llegar
           </Button>
         </a>
         <Link href={"/chat" + query}>
-          <Button className="w-full" type="submit">
+          <Button variant="green" className="w-full">
             Preguntarle a Yakú Bot
           </Button>
         </Link>
+
+        <Button variant="green" className="w-full" onClick={handleClick}>
+          Reclamar recompensa
+        </Button>
       </DialogContent>
     </Dialog>
   );
