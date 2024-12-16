@@ -82,7 +82,6 @@ export const Map = () => {
           municipio.sitio_interes.filter((sitio) => sitio.coordX !== null)
         );
 
-        console.log(sitiosInteres);
         setInterestPoints(sitiosInteres);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -118,7 +117,7 @@ export const Map = () => {
             baseProfile="tiny"
             xmlns="http://www.w3.org/2000/svg"
             version="1.2"
-            viewBox="50 200 1400 400"
+            viewBox="120 200 1400 400"
             height={500}
             className="svg-zoom"
             style={{ transform: "scale(2.0)" }}
@@ -717,30 +716,35 @@ export const Map = () => {
   };
 
   return (
-    <div className="map-container">
-      <button
-        onClick={handleResetZoom}
-        className={`${
-          selectedRegion?.id ? "" : "hidden"
-        } fixed top-24 right-8 z-50 mb-4 p-2 bg-green-600 text-white rounded hover:bg-green-500`}
-      >
-        Volver al mapa
-      </button>
-
-      <h2
-        className={`fixed top-24 left-8 z-50 mb-4 p-2 text-2xl font-semibold	`}
-      >
-        {cities && selectedRegion
-          ? `Municipio de ${
-              cities.find((city) => city.id === Number(selectedRegion.id))
-                ?.name || "Departamento del Caquetá"
-            }`
-          : ""}
-      </h2>
-      <div className="relative" onMouseEnter={fetchAllData}>
-        {renderSVGContent()}
+    <section>
+      <div className="flex justify-between	p-4">
+        <h2 className={`text-2xl font-semibold	`}>
+          {selectedRegion?.id
+            ? `Municipio de ${
+                cities.find((city) => city.id === Number(selectedRegion.id))
+                  ?.name
+              }`
+            : "Departamento del Caquetá"}
+        </h2>
+        <button
+          onClick={handleResetZoom}
+          className={`${
+            selectedRegion?.id ? "" : "hidden"
+          }  mb-4 p-2 bg-green-600 text-white rounded hover:bg-green-500`}
+        >
+          Volver al mapa
+        </button>
       </div>
-      <MapModal open={showModal} setOpen={setShowModal} data={selectedPoint} />
-    </div>
+      <div className="map-container grid place-items-center">
+        <div className="relative" onMouseEnter={fetchAllData}>
+          {renderSVGContent()}
+        </div>
+        <MapModal
+          open={showModal}
+          setOpen={setShowModal}
+          data={selectedPoint}
+        />
+      </div>
+    </section>
   );
 };

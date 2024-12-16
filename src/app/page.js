@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen bg-gray-100">
       {/* Contenido principal */}
-      <div className="grid place-items-center">
+      <div>
         <Map />
       </div>
 
