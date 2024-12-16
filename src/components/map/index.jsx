@@ -95,9 +95,7 @@ export const Map = () => {
   const isLoggedEffect = async () => {
     const user = await isLogged();
     const userEmail = user?.user?.email;
-    console.warn("User Email:", userEmail);
     const user2 = await getByEmail(userEmail);
-    console.warn("User2:", user2);
     userId.current = user2[0]?.id;
   };
 
