@@ -1,8 +1,9 @@
-import supabase  from '../conection'; 
-import { getByEmail, isLogged } from '../user';
+import supabase from "../conection";
 
-export async function createTravel(id) {
-    user = isLogged().email;
-    id_user = getByEmail(user);
-    console.log(id_user)
+export async function createTravel(travelData) {
+  const { userId, id } = travelData;
+
+  const { data, error } = await supabase
+    .from("travel")
+    .insert({ fk_usuario: userId, fk_sitio: id });
 }
