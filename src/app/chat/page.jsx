@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function ChatBotPage() {
+function ChatBotPage() {
   const searchParams = useSearchParams();
 
   const search = searchParams.get("message");
@@ -74,7 +74,7 @@ export default function ChatBotPage() {
                   : "bg-gray-200 text-left"
               }`}
             >
-              <span className="font-bold">{msg.user}:</span> {msg.text}
+              <span className="font-bold">{msg.user && "Tú"}:</span> {msg.text}
             </div>
           ))}
           {isLoading && (
@@ -110,5 +110,12 @@ export default function ChatBotPage() {
         />
       </section>
     </main>
+  );
+}
+export default function ChatBotPageWrapper() {
+  return (
+    <Suspense fallback={<div>Cargando...</div>}>
+      <ChatBotPage />
+    </Suspense>
   );
 }
