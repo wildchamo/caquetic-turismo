@@ -10,7 +10,6 @@ export async function GET() {
 
   const prompt = "hola"; // Replace with your actual prompt
 
-  console.log(openAIKey);
   try {
     const response = await fetch("https://api.openai.com/v1/completions", {
       method: "POST",
