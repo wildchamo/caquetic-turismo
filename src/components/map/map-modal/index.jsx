@@ -10,14 +10,15 @@ import {
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { createTravel } from "@/services/travel";
 
 export const MapModal = ({ open, setOpen, data }) => {
   if (!open) return null;
 
   const query = `?message=Hola, quiero info sobre el destino ${data.name}. ¿Qué eventos y sitios turísticos hay para ver allá?`;
 
-  const handleClick = () => {
-    alert("hola Jose");
+  const handleClick = async () => {
+    await createTravel({ userId: data.userId, id: data.id });
   };
   console.warn(data);
   return (
