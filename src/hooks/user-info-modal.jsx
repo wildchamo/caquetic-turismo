@@ -14,7 +14,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { create_user, isLogged, SignUpUser, getByEmail } from "@/services/user";
+import {
+  create_user,
+  isLogged,
+  SignUpUser,
+  getByEmail,
+  getUserTravels,
+} from "@/services/user";
 import { LogIn } from "@/services/user";
 
 export function UserInfoModal({ type = "outline" }) {
@@ -52,10 +58,18 @@ export function UserInfoModal({ type = "outline" }) {
 
     const user2 = await getByEmail(userEmail);
 
-    setUser(user2);
+    const user3 = user2[0];
 
-    if (user2) {
-      setUser(user2[0]);
+    const userId = user3?.id;
+
+    console.error(userId);
+    if (user3) {
+      let user4;
+
+      const response = await getUserTravels(userId);
+
+      console.log(response);
+      setUser(user3);
       return setIsLoggedIn(true);
     } else {
       return setIsLoggedIn(false);
