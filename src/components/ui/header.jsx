@@ -19,10 +19,10 @@ export default function Header() {
       </Link>
 
       {/* Botones de navegación */}
-      <nav className="flex items-center gap-6">
-      <UserInfoModal></UserInfoModal>
+      <nav className="gap-6 hidden lg:flex lg:items-center">
+        <UserInfoModal></UserInfoModal>
         <Link
-         href="/about"
+          href="/about"
           className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
         >
           Acerca del Proyecto👨🏻‍💻

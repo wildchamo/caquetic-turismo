@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 import { create_user } from "@/services/user";
 import { LogIn } from "@/services/user";
 
-export function UserInfoModal() {
+export function UserInfoModal({ type = "outline" }) {
   const [open, setOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const {
@@ -41,9 +41,10 @@ export function UserInfoModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Unirme al Club</Button>
+        <Button variant={type}>Unirme al Club</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
+        {" "}
         <DialogHeader>
           <DialogTitle>
             {isLogin ? "¡INICIA SESIÓN!" : "¡REGÍSTRATE!"}
@@ -54,7 +55,6 @@ export function UserInfoModal() {
               : "Regístrate para recibir información exclusiva sobre eventos y actividades en el Caquetá. ¡Sé parte del club! 🌟"}
           </DialogDescription>
         </DialogHeader>
-
         {isLogin ? (
           <form onSubmit={handleSubmit(onSubmitLog)}>
             <div className="grid gap-4">
@@ -184,7 +184,6 @@ export function UserInfoModal() {
             </DialogFooter>
           </form>
         )}
-
         {/* Botón para alternar entre login y registro */}
         <h4
           onClick={() => setIsLogin(!isLogin)}
