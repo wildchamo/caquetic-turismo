@@ -64,7 +64,7 @@ const askChatGPT = async (message) => {
   try {
     const response = await fetch(BASE_URL, options);
     const json = await response.json();
-
+    console.log(json);
     const message = json.choices[0].message.content.trim();
 
     return message;
